@@ -5,8 +5,7 @@ var mongoose = require("mongoose");
 var app = Express();
 
 const port = 5038;
-var databasename = "tododb";
-var database;
+
 var connect_string =
   "mongodb+srv://tartejbros:Rr5rnp6PAQng3lHr@todoapp.wrcgueg.mongodb.net/tododb?retryWrites=true&w=majority";
 console.log("Connecting to database...");
