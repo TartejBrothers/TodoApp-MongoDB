@@ -5,7 +5,15 @@ var mongoose = require("mongoose");
 var app = Express();
 
 const port = 5038;
-
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.header(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+  );
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  next();
+});
 var connect_string =
   "mongodb+srv://tartejbros:Rr5rnp6PAQng3lHr@todoapp.wrcgueg.mongodb.net/tododb?retryWrites=true&w=majority";
 console.log("Connecting to database...");
@@ -26,7 +34,17 @@ app.get("/todoapp", (request, response) => {
       response.status(500).send("Internal Server Error");
     });
 });
-
+app.post("/todoapp/new", (request, response) => {
+  const addvalue = new todo({
+    id: request.body.id,
+    task: request.body.task,
+  });
+  addvalue.save((err, result) => {
+    if (err) {
+      console.log(err);}
+  });
+  console.log(request.body);
+});
 const start = async () => {
   await mongoose.connect(connect_string);
   database = mongoose.connection;
