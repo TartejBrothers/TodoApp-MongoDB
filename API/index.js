@@ -40,8 +40,8 @@ app.post("/todoapp/new", (request, response) => {
     task: request.body.task,
   });
   addvalue.save((err, result) => {
-    if (err) {
-      console.log(err);}
+    if (err) return console.log(err);
+    console.log(result);
   });
   console.log(request.body);
 });
