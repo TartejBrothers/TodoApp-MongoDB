@@ -22,21 +22,21 @@ class HomePage extends Component {
   }
 
   addclick() {
-    var id = document.getElementById("newid").value;
     var description = document.getElementById("newdescription").value;
-    var data = { id: id, task: description };
+    var data = {
+      task: description,
+    };
     fetch(this.Api_url + "todoapp/new", {
       method: "POST",
-      body: data,
+      headers: {
+        "Content-Type": "application/json", // Specify the content type as JSON
+      },
+      body: JSON.stringify(data),
     })
       .then((response) => response.json())
       .then((data) => {
         alert("Task Added");
         this.refreshList();
-      })
-      .catch((error) => {
-        console.error("Error adding task:", error);
-        alert("Failed to add task. Please try again.");
       });
   }
 
@@ -45,7 +45,6 @@ class HomePage extends Component {
     return (
       <div>
         <h1>TodoAPP</h1>
-        <input id="newid" type="number" placeholder="New ID" />
         <input id="newdescription" type="text" placeholder="New Description" />
 
         <button id="addtask" onClick={() => this.addclick()}>
@@ -53,7 +52,7 @@ class HomePage extends Component {
         </button>
 
         {notes.map((note) => (
-          <p key={note.id}>
+          <p key={note._id}>
             <b>{note.task}</b>
           </p>
         ))}
