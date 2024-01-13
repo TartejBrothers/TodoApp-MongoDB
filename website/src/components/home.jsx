@@ -1,6 +1,6 @@
 import React from "react";
 import { Component } from "react";
-
+import "../styles/home.css";
 class HomePage extends Component {
   constructor(props) {
     super(props);
@@ -43,10 +43,15 @@ class HomePage extends Component {
   render() {
     const { notes } = this.state;
     return (
-      <div>
+      <div className="homebody">
         <h1>TodoAPP</h1>
-        <input id="newdescription" type="text" placeholder="New Description" />
-
+        <input
+          id="newdescription"
+          type="text"
+          placeholder="New Description"
+          required
+        />
+        <br />
         <button id="addtask" onClick={() => this.addclick()}>
           Add Task
         </button>
