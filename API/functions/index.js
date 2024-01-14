@@ -31,7 +31,8 @@ app.use((req, res, next) => {
   next();
 });
 
-const connectString = "";
+const connectString =
+  "";
 
 const schema = new mongoose.Schema({
   id: Number,

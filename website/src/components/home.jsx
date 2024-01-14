@@ -55,7 +55,16 @@ class HomePage extends Component {
         <button id="addtask" onClick={() => this.addclick()}>
           Add Task
         </button>
-
+        <input
+          id="newdescription"
+          type="text"
+          placeholder="New Description"
+          required
+        />
+        <br />
+        <button id="addtask" onClick={() => this.deletetask()}>
+          Delete Task
+        </button>
         {notes.map((note) => (
           <p key={note._id}>
             <b>{note.task}</b>
