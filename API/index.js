@@ -16,8 +16,7 @@ app.use((req, res, next) => {
   next();
 });
 
-const connectString =
-  "";
+const connectString = "";
 
 const schema = new mongoose.Schema({
   id: Number,
@@ -66,3 +65,4 @@ const start = async () => {
 };
 
 start();
+exports.api = functions.https.onRequest(app);
