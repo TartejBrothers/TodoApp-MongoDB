@@ -52,7 +52,7 @@ app.post("/todoapp/new", async (request, response) => {
     response.status(200).json(result);
   } catch (error) {
     console.error(error);
-    response.status(500).json({ error: "Internal Server Error" });
+    response.status(500).json({ error: "Server Error" });
   }
 });
 
