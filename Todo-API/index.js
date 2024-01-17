@@ -20,7 +20,8 @@ app.use((req, res, next) => {
   next();
 });
 
-const connectString = "";
+const connectString =
+  "mongodb+srv://tartejbros:Rr5rnp6PAQng3lHr@todoapp.wrcgueg.mongodb.net/tododb?retryWrites=true&w=majority";
 
 const schema = new mongoose.Schema({
   id: Number,
@@ -28,6 +29,11 @@ const schema = new mongoose.Schema({
 });
 
 const todo = mongoose.model("todocollections", schema);
+const counterschema = new mongoose.Schema({
+  id: String,
+  count: Number,
+});
+const countermodel = mongoose.model("countermodels", counterschema);
 
 app.get("/todoapp", (request, response) => {
   todo
@@ -43,18 +49,43 @@ app.get("/todoapp", (request, response) => {
 
 app.post("/todoapp/new", async (request, response) => {
   try {
+    let result = await countermodel.findOneAndUpdate(
+      { id: "autoval" },
+      { $inc: { count: 1 } },
+      { new: true }
+    );
+
+    let countid;
+    if (!result) {
+      const newval = new countermodel({ id: "autoval", count: 1 });
+      await newval.save();
+      countid = 1;
+    } else {
+      countid = result.count;
+    }
+
     const addvalue = new todo({
+      id: countid,
       task: request.body.task,
     });
 
-    const result = await addvalue.save();
-    response.status(200).json(result);
+    await addvalue.save();
+    response.status(200).json({ message: "Todo added successfully" });
   } catch (error) {
     console.error(error);
     response.status(500).json({ error: "Server Error" });
   }
 });
 
+app.delete("/todoapp/delete/:task", async (request, response) => {
+  try {
+    const result = await todo.deleteOne({ task: request.params.task });
+    response.status(200).json(result);
+  } catch (error) {
+    console.error(error);
+    response.status(500).json({ error: "Server Error" });
+  }
+});
 const start = async () => {
   try {
     await mongoose.connect(connectString);
