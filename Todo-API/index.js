@@ -20,8 +20,7 @@ app.use((req, res, next) => {
   next();
 });
 
-const connectString =
-  "mongodb+srv://tartejbros:Rr5rnp6PAQng3lHr@todoapp.wrcgueg.mongodb.net/tododb?retryWrites=true&w=majority";
+const connectString = "";
 
 const schema = new mongoose.Schema({
   id: Number,
