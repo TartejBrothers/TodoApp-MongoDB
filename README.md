@@ -29,11 +29,14 @@
 
 - Install npm packages :
   `cd Todo-API`
+  <br/>
   `npm i`
 
 - Change Directory :
   `cd ..`
+  <br/>
   `cd website`
+  <br/>
   `npm i`
 
 </ul><h2>Improvements</h2>
