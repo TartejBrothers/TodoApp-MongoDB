@@ -61,7 +61,40 @@ class HomePage extends Component {
       alert("Failed to add task");
     }
   }
+  async deleteclick() {
+    const newid = document.getElementById("newid").value.trim();
 
+    if (!newid) {
+      alert("Please enter an ID to Delete");
+      return;
+    }
+
+    const data = {
+      id: newid,
+    };
+
+    try {
+      const response = await fetch(this.Api_url + "todoapp/delete/" + newid, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to Delete Task");
+      }
+
+      const responseData = await response.json();
+      console.log(responseData);
+      alert("Task Deleted");
+      this.refreshList();
+    } catch (error) {
+      console.error("Error Deleting task:", error);
+      alert("Failed to Delete task");
+    }
+  }
   render() {
     const { notes } = this.state;
     return (
@@ -77,8 +110,24 @@ class HomePage extends Component {
         <button id="addtask" onClick={() => this.addclick()}>
           Add Task
         </button>
+        <br />
+        <input
+          id="newid"
+          type="number"
+          placeholder="ID to be Deleted"
+          required
+        />
+        <br />
+        <button id="addtask" onClick={() => this.deleteclick()}>
+          Delete Task
+        </button>
+        <p className="notesbody">
+          <b>ID</b>
+          <b>Task</b>
+        </p>
         {notes.map((note) => (
-          <p key={note._id}>
+          <p key={note._id} className="notesbody">
+            <b>{note.id}</b>
             <b>{note.task}</b>
           </p>
         ))}

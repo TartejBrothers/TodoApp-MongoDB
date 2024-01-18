@@ -20,8 +20,7 @@ app.use((req, res, next) => {
   next();
 });
 
-const connectString =
-  "mongodb+srv://tartejbros:Rr5rnp6PAQng3lHr@todoapp.wrcgueg.mongodb.net/tododb?retryWrites=true&w=majority";
+const connectString = "";
 
 const schema = new mongoose.Schema({
   id: Number,
@@ -77,9 +76,9 @@ app.post("/todoapp/new", async (request, response) => {
   }
 });
 
-app.delete("/todoapp/delete/:task", async (request, response) => {
+app.delete("/todoapp/delete/:id", async (request, response) => {
   try {
-    const result = await todo.deleteOne({ task: request.params.task });
+    const result = await todo.deleteOne({ id: request.params.id });
     response.status(200).json(result);
   } catch (error) {
     console.error(error);
