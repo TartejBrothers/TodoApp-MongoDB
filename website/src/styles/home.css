@@ -16,8 +16,7 @@
   margin-block-end: 20px;
 }
 .homebody p {
-  padding: 10px 20px;
-  width: calc(100% - 40px);
+  width: calc(100% - 200px);
   background-color: #353535;
   font-size: 24px;
   border-radius: 30px;
@@ -40,8 +39,25 @@ button {
   padding: 10px 40px;
   margin-top: 20px;
 }
+.notesbody {
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+  padding: 5px 100px 5px 100px;
+}
 @media screen and (max-width: 600px) {
-  .homebody {
-    font-size: 24px;
+  .notesbody {
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+
+    padding: 5px 20px 5px 20px;
+  }
+  .homebody p {
+    width: calc(100% - 40px);
+    font-size: 16px;
+  }
+  .homebody h1 {
+    font-size: 30px;
   }
 }
