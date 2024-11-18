@@ -16,7 +16,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.21.1",
-    "firebase-admin": "^12.6.0",
+    "firebase-admin": "^12.7.0",
     "firebase-functions": "^4.8.0",
 
     "mongodb": "^6.10.0",
